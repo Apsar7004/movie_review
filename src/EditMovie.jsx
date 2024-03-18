@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import * as yup from "yup";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import {api} from "./global"
 
 const EditMovie = () => {
      
@@ -15,7 +16,7 @@ const EditMovie = () => {
      
 
     useEffect(() => {
-        fetch(`https://65f1716f034bdbecc7629ecb.mockapi.io/movies/mov/${id}`,{
+        fetch(`${api}/getOne/${id}`,{
             method:"GET"
         })
         .then((data)=> data.json())
@@ -55,7 +56,7 @@ function EditForm({movie}){
 });
 
   const editmovie=(values)=>{
-    fetch(`https://65f1716f034bdbecc7629ecb.mockapi.io/movies/mov/${movie.id}`,{
+    fetch(`${api}/update/${movie._id}`,{
         method:"PUT",
         body:JSON.stringify(values),
         headers:{"Content-Type":"application/json"},

@@ -3,9 +3,11 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useFormik} from 'formik';
 import * as yup from "yup";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import {api} from "./global"
 export default function Register() {
   
+    const navigate = useNavigate()
     const movievalidation=yup.object({
         username:yup.string().required(),
         email:yup.string().required().email(),
@@ -20,8 +22,18 @@ export default function Register() {
     validationSchema:movievalidation,
     onSubmit:(values)=>{
         console.log(values);
+        register(values)
     }
   });
+
+  const register = (values) =>{
+    fetch(`${api}/register` , {
+      method:"POST",
+      body:JSON.stringify(values),
+      headers:{"Content-Type":"application/json"}
+    }).then(()=>{alert("Registered successfully")}).then(()=>{navigate('/login')});
+  }
+
   return (
     <div>
          <form className='addform' onSubmit={formik.handleSubmit}>
@@ -39,7 +51,7 @@ export default function Register() {
 
 
          <Button variant="contained" type='submit'>Submit</Button>
-         <h4>Dont'have an account ? click here <Link to='/login'>Login</Link></h4>
+         <h4>Dont'have an account ? click here <Link to='/'>Login</Link></h4>
     </form>
     </div>
     

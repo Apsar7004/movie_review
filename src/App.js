@@ -31,7 +31,7 @@ function App() {
    
         <Routes>
           <Route path="/register" element={<Register/>}/>
-          <Route path="/login" element={<Login/>}/>
+          <Route path="/" element={<Login/>}/>
           <Route path="/portal" element={<Portal mode={mode} setmode={setmode}/>}>
               <Route path='Home' element={<Home />} />
               <Route path="addmovie" element={<Addmovie/>}/>

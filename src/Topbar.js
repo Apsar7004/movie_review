@@ -26,8 +26,11 @@ export default function Topbar({mode,setmode}) {
         <Button  color='inherit'>{mode === 'dark' ? "Light" : "Dark"}mode</Button>
         </div>
         
-          <Button style={{marginLeft:"25px"}} color="inherit" onClick={()=>navigate("/login")}>Login</Button>
-         
+          {/* <Button style={{marginLeft:"25px"}} color="inherit" onClick={()=>navigate("/login")}>Login</Button> */}
+          <Button style={{marginLeft:"25px"}} color="inherit" onClick={()=>{
+            localStorage.removeItem("backend-token");
+            navigate("/");
+          }}>Logout</Button>
         </Toolbar>
       </AppBar>
     </Box>
